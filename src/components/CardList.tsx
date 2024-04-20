@@ -3,13 +3,16 @@ import { useGetMovieListQuery } from '../feather/movies/movie-api-slice';
 import CradMovie from './CardMovie';
 import CardSkleton from './CardSkleton';
 import { useState } from 'react';
+import ShowError from './ShowError';
 
 const CardList = () => {
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading } = useGetMovieListQuery(page);
+  const { data, isLoading, isError } = useGetMovieListQuery(page);
 
   const movies = data?.results ? data.results : [];
   const skletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  if (isError) return <ShowError />;
 
   return (
     <Box my={'20px'}>
