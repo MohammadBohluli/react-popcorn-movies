@@ -21,6 +21,7 @@ const CradMovie = ({ title, release_date, poster_path }: Props) => {
           component={'img'}
           height="350"
           image={`https://image.tmdb.org/t/p/w500${poster_path}`}
+          alt={title}
         />
       </CardActionArea>
       <CardContent>
