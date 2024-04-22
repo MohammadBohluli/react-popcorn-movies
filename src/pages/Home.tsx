@@ -1,10 +1,19 @@
+import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import CardList from '../components/CardList';
+import { Box, Typography } from '@mui/material';
+
 const Home = () => {
   return (
     <div>
       <Navbar />
-      <CardList />
+      <Box>
+        <Typography component={'h1'} fontSize={'60px'}>
+          Home Page Popcorn Movie
+        </Typography>
+      </Box>
+      <Box>
+        <Outlet />
+      </Box>
     </div>
   );
 };

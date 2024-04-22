@@ -1,11 +1,11 @@
 import { Box, Grid, Pagination, Stack } from '@mui/material';
 import { useGetMovieListQuery } from '../feather/movies/movie-api-slice';
-import CradMovie from './CardMovie';
-import CardSkleton from './CardSkleton';
+import CradMovie from '../components/CardMovie';
+import CardSkleton from '../components/CardSkleton';
 import { useState } from 'react';
-import ShowError from './ShowError';
+import ShowError from '../components/ShowError';
 
-const CardList = () => {
+const MovieList = () => {
   const [page, setPage] = useState<number>(1);
   const { data, isLoading, isError } = useGetMovieListQuery(page);
 
@@ -50,4 +50,4 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export default MovieList;
