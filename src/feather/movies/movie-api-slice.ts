@@ -21,7 +21,7 @@ interface FetchMoviesResponse<T> {
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://xapi.themoviedb.org/3/',
+    baseUrl: 'https://api.themoviedb.org/3/',
     headers: { Authorization: `Bearer ${TOKEN}` },
   }),
   endpoints(builder) {
