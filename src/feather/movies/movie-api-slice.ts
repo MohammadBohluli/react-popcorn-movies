@@ -31,7 +31,7 @@ export const movieApi = createApi({
           return `movie/popular?page=${page}`;
         },
       }),
-      getMovieDetails: builder.query<Movie, number | void>({
+      getSingleMovie: builder.query<Movie, number | void>({
         query(movieId) {
           return `movie/${movieId}`;
         },
@@ -40,4 +40,4 @@ export const movieApi = createApi({
   },
 });
 
-export const { useGetMovieListQuery, useGetMovieDetailsQuery } = movieApi;
+export const { useGetMovieListQuery, useGetSingleMovieQuery } = movieApi;
