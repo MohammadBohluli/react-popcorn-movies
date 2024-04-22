@@ -7,11 +7,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home.tsx';
 import MovieList from './pages/MovieList.tsx';
 import SingleMovie from './pages/SingleMovie.tsx';
+import ErrorPage from './components/ErrorPage.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+    errorElement: <ErrorPage />,
     children: [
       { path: 'movies', element: <MovieList /> },
       { path: 'movies/:movieId', element: <SingleMovie /> },
