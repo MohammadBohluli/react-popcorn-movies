@@ -1,16 +1,27 @@
 import { Box, Grid, Pagination, Stack } from '@mui/material';
-import { useGetMovieListQuery } from '../feather/movies/movie-api-slice';
+import {
+  useGetMovieListQuery,
+  useSearchMovieQuery,
+} from '../feather/movies/movie-api-slice';
 import CradMovie from '../components/CardMovie';
 import CardSkleton from '../components/CardSkleton';
-
 import ShowError from '../components/ShowError';
 import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../app/hooks';
 
 const MovieList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const searchInput = useAppSelector((state) => state.movie.searchInput);
 
   const pageNumber = searchParams.get('page') ?? 1;
-  const { data, isLoading, isError } = useGetMovieListQuery(Number(pageNumber));
+  const {
+    data,
+    isLoading: movieListLoading,
+    isError,
+  } = useGetMovieListQuery(Number(pageNumber));
+
+  const { data: searchList, isLoading: searchLoading } =
+    useSearchMovieQuery(searchInput);
 
   const movies = data?.results ? data.results : [];
   const skletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -29,18 +40,24 @@ const MovieList = () => {
     <Box my={'20px'}>
       <Grid container spacing={8} justifyContent={'center'}>
         {/* loading skleton until load data */}
-        {isLoading &&
+        {movieListLoading &&
           skletons.map((skleton) => (
             <Grid item key={skleton}>
               <CardSkleton key={skleton} />
             </Grid>
           ))}
 
-        {movies.map((moviItem) => (
-          <Grid item key={moviItem.id}>
-            <CradMovie {...moviItem} />
-          </Grid>
-        ))}
+        {searchInput === ''
+          ? movies.map((moviItem) => (
+              <Grid item key={moviItem.id}>
+                <CradMovie {...moviItem} />
+              </Grid>
+            ))
+          : searchList?.results.map((moviItem) => (
+              <Grid item key={moviItem.id}>
+                <CradMovie {...moviItem} />
+              </Grid>
+            ))}
       </Grid>
       {/* Pagination ///////////////////////////////////////// */}
       <Stack my={7}>
