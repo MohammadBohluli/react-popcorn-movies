@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-
 import { movieApi } from '../feather/movies/movie-api-slice';
+import movieReducer from '../feather/movies/movieSlice';
+
 export const store = configureStore({
   reducer: {
+    movie: movieReducer,
     [movieApi.reducerPath]: movieApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {

@@ -36,8 +36,17 @@ export const movieApi = createApi({
           return `movie/${movieId}`;
         },
       }),
+      searchMovie: builder.query<FetchMoviesResponse<Movie>, string | void>({
+        query(searchQuery) {
+          return `search/movie?query=${searchQuery}`;
+        },
+      }),
     };
   },
 });
 
-export const { useGetMovieListQuery, useGetSingleMovieQuery } = movieApi;
+export const {
+  useGetMovieListQuery,
+  useGetSingleMovieQuery,
+  useSearchMovieQuery,
+} = movieApi;

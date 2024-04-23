@@ -1,7 +1,9 @@
-import { Input, InputBase } from '@mui/material';
+import { InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
-import { useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
+import { useAppDispatch } from '../app/hooks';
+import { setSearchInput } from '../feather/movies/movieSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -47,20 +49,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 ////////////////////////////////////////////////////////////
 const SearchInput = () => {
-  const [value, setVlaue] = useState<string>('');
+  const [value, setValue] = useState<string>('');
+  const dispatch = useAppDispatch();
+
+  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(setSearchInput(value));
+  };
 
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        value={value}
-        onChange={(e) => setVlaue(e.target.value)}
-        placeholder="Search Movies ..."
-        inputProps={{ 'aria-label': 'search' }}
-      />
-    </Search>
+    <form onSubmit={handleOnSubmit}>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+
+        <StyledInputBase
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Search Movies ..."
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Search>
+    </form>
   );
 };
 
