@@ -51,6 +51,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const SearchInput = () => {
   const [value, setValue] = useState<string>('');
   const dispatch = useAppDispatch();
+  // const { data: searchList } = useSearchMovieQuery({
+  //   searchQuery: searchInput,
+  //   page: Number(pageNumber),
+  // });
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -21,6 +21,12 @@ interface SearchQueryArgument {
   searchQuery: string;
   page: number;
 }
+
+interface FilterQueryArgument {
+  page?: number;
+  sort_by?: string;
+}
+
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: fetchBaseQuery({
@@ -29,9 +35,13 @@ export const movieApi = createApi({
   }),
   endpoints(builder) {
     return {
-      getMovieList: builder.query<FetchMoviesResponse<Movie>, number | void>({
-        query(page = 1) {
-          return `discover/movie?page=${page}`;
+      getMovieList: builder.query<
+        FetchMoviesResponse<Movie>,
+        FilterQueryArgument
+      >({
+        query(args) {
+          const { page = 1, sort_by = 'popularity.desc' } = args;
+          return `discover/movie?page=${page}&sort_by=${sort_by}`;
         },
       }),
       getSingleMovie: builder.query<Movie, number | void>({
@@ -55,5 +65,4 @@ export const {
   useGetMovieListQuery,
   useGetSingleMovieQuery,
   useSearchMovieQuery,
-  useLazyGetMovieListQuery,
 } = movieApi;

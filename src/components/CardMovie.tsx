@@ -29,7 +29,7 @@ const CradMovie = ({ id, title, release_date, poster_path }: Props) => {
       <CardContent>
         <Typography component={'h3'} fontWeight={'bold'} fontSize={'18px'}>
           <Link
-            to={`${id}`}
+            to={`movies/${id}`}
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
             {title}
