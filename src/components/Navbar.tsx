@@ -7,6 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Drawer } from '@mui/material';
 import { useState } from 'react';
 import SearchInput from './SearchInput';
+import SortSelector from './SortSelector';
 
 export default function SearchAppBar() {
   const [open, setOpen] = useState<boolean>(false);
@@ -38,7 +39,9 @@ export default function SearchAppBar() {
       </Box>
 
       <Drawer open={open} onClose={() => setOpen(false)}>
-        <div style={{ width: '20vw' }}>Test</div>
+        <div style={{ width: '80vw' }}>
+          <SortSelector />
+        </div>
       </Drawer>
     </>
   );

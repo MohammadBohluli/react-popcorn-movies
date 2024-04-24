@@ -4,6 +4,7 @@ import CradMovie from '../components/CardMovie';
 import CardSkleton from '../components/CardSkleton';
 import ShowError from '../components/ShowError';
 import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../app/hooks';
 
 // const Home = () => {
 //   const [searchParams, setSearchParams] = useSearchParams();
@@ -81,6 +82,8 @@ import { useSearchParams } from 'react-router-dom';
 // ///////////////////////////////////////////////////////
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const sortBy = useAppSelector((state) => state.movie.sortBy);
+
   const pageNumber = searchParams.get('page') ?? 1;
 
   const {
@@ -89,6 +92,7 @@ const Home = () => {
     isError,
   } = useGetMovieListQuery({
     page: Number(pageNumber),
+    sort_by: sortBy,
   });
   const movies = data?.results ? data.results : [];
 
