@@ -17,7 +17,10 @@ interface FetchMoviesResponse<T> {
   total_pages: number;
   total_results: number;
 }
-
+interface SearchQueryArgument {
+  searchQuery: string;
+  page: number;
+}
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: fetchBaseQuery({
@@ -36,9 +39,12 @@ export const movieApi = createApi({
           return `movie/${movieId}`;
         },
       }),
-      searchMovie: builder.query<FetchMoviesResponse<Movie>, string | void>({
-        query(searchQuery) {
-          return `search/movie?query=${searchQuery}`;
+      searchMovie: builder.query<
+        FetchMoviesResponse<Movie>,
+        SearchQueryArgument
+      >({
+        query({ searchQuery = '', page = 1 }) {
+          return `search/movie?query=${searchQuery}&page=${page}`;
         },
       }),
     };
@@ -49,4 +55,5 @@ export const {
   useGetMovieListQuery,
   useGetSingleMovieQuery,
   useSearchMovieQuery,
+  useLazyGetMovieListQuery,
 } = movieApi;
