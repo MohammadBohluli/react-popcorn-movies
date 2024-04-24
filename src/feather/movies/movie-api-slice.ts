@@ -28,7 +28,7 @@ export const movieApi = createApi({
     return {
       getMovieList: builder.query<FetchMoviesResponse<Movie>, number | void>({
         query(page = 1) {
-          return `movie/popular?page=${page}`;
+          return `discover/movie?page=${page}`;
         },
       }),
       getSingleMovie: builder.query<Movie, number | void>({
