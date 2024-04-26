@@ -39,9 +39,19 @@ export default function SearchAppBar() {
       </Box>
 
       <Drawer open={open} onClose={() => setOpen(false)}>
-        <div style={{ width: '80vw' }}>
+        <Box
+          sx={{
+            width: {
+              xs: '80vw',
+              sm: '40vw',
+              md: '30vw',
+              lg: '20vw',
+            },
+          }}
+          p={1}
+        >
           <SortSelector />
-        </div>
+        </Box>
       </Drawer>
     </>
   );

@@ -2,10 +2,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
+  FormControl,
+  NativeSelect,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -15,10 +13,6 @@ import { setSortBy } from '../feather/movies/movieSlice';
 const SortSelector = () => {
   const sortBy = useAppSelector((state) => state.movie.sortBy);
   const dispatch = useAppDispatch();
-
-  const handleChange = (event: SelectChangeEvent) => {
-    dispatch(setSortBy(event.target.value));
-  };
 
   const sortOrder = [
     { value: 'popularity.desc', label: 'Popularity Descending' },
@@ -30,27 +24,35 @@ const SortSelector = () => {
     { value: 'title.asc', label: 'Title (A-Z)' },
     { value: 'title.desc', label: 'Title (Z-A)' },
   ];
+
   return (
-    <Box>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          Sort
-        </AccordionSummary>
-        <AccordionDetails>
-          <Select value={sortBy} label="Age" onChange={handleChange}>
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1-content"
+        id="panel1-header"
+      >
+        Sort
+      </AccordionSummary>
+      <AccordionDetails>
+        <FormControl fullWidth>
+          <NativeSelect
+            value={sortBy}
+            onChange={(e) => dispatch(setSortBy(e.target.value))}
+            inputProps={{
+              name: 'Sort',
+              id: 'uncontrolled-native',
+            }}
+          >
             {sortOrder.map((order) => (
-              <MenuItem key={order.value} value={order.value}>
+              <option key={order.value} value={order.value}>
                 {order.label}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
-        </AccordionDetails>
-      </Accordion>
-    </Box>
+          </NativeSelect>
+        </FormControl>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 

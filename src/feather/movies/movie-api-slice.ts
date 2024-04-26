@@ -24,7 +24,7 @@ interface SearchQueryArgument {
 
 interface FilterQueryArgument {
   page?: number;
-  sort_by?: string;
+  sort_by?: 'popularity.desc';
 }
 
 export const movieApi = createApi({
