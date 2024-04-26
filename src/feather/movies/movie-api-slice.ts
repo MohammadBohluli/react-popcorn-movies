@@ -11,6 +11,15 @@ interface Movie {
   release_date: string;
 }
 
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface GenreList {
+  genres: Genre[];
+}
+
 interface FetchMoviesResponse<T> {
   results: T[];
   page: number;
@@ -57,6 +66,11 @@ export const movieApi = createApi({
           return `search/movie?query=${searchQuery}&page=${page}`;
         },
       }),
+      getGenreList: builder.query<GenreList, void>({
+        query() {
+          return `genre/movie/list`;
+        },
+      }),
     };
   },
 });
@@ -65,4 +79,5 @@ export const {
   useGetMovieListQuery,
   useGetSingleMovieQuery,
   useSearchMovieQuery,
+  useGetGenreListQuery,
 } = movieApi;
