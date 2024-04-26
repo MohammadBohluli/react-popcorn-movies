@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   FormControl,
   NativeSelect,
+  Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -31,10 +32,17 @@ const SortSelector = () => {
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1-content"
         id="panel1-header"
+        sx={{
+          height: '50px',
+          '&.Mui-expanded': {
+            minHeight: '0',
+            borderBottom: '1px solid grey',
+          },
+        }}
       >
-        Sort
+        <Typography>Sort</Typography>
       </AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails sx={{ padding: '30px 16px' }}>
         <FormControl fullWidth>
           <NativeSelect
             value={sortBy}
