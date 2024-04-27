@@ -83,6 +83,7 @@ import { useAppSelector } from '../app/hooks';
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = useAppSelector((state) => state.movie.sortBy);
+  const selectedGenres = useAppSelector((state) => state.movie.selectedGenres);
 
   const pageNumber = searchParams.get('page') ?? 1;
 
@@ -93,7 +94,9 @@ const Home = () => {
   } = useGetMovieListQuery({
     page: Number(pageNumber),
     sort_by: sortBy,
+    selectedGenres: selectedGenres.join(','),
   });
+
   const movies = data?.results ? data.results : [];
 
   const skletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

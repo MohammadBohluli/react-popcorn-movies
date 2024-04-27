@@ -33,7 +33,8 @@ interface SearchQueryArgument {
 
 interface FilterQueryArgument {
   page?: number;
-  sort_by?: 'popularity.desc';
+  sort_by?: string;
+  selectedGenres?: string;
 }
 
 export const movieApi = createApi({
@@ -49,8 +50,12 @@ export const movieApi = createApi({
         FilterQueryArgument
       >({
         query(args) {
-          const { page = 1, sort_by = 'popularity.desc' } = args;
-          return `discover/movie?page=${page}&sort_by=${sort_by}`;
+          const {
+            page = 1,
+            sort_by = 'popularity.desc',
+            selectedGenres = '28',
+          } = args;
+          return `discover/movie?page=${page}&sort_by=${sort_by}&with_genres=${selectedGenres}`;
         },
       }),
       getSingleMovie: builder.query<Movie, number | void>({
