@@ -1,10 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-interface MovieState {
-  searchInput: string;
-  sortBy: string;
-  selectedGenres: number[];
-}
+import { MovieState } from '../../entities/entities';
 
 const initialState: MovieState = {
   searchInput: '',
