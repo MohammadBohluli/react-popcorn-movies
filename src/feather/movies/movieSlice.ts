@@ -5,7 +5,9 @@ const initialState: MovieState = {
   searchInput: '',
   sortBy: '',
   selectedGenres: [],
-  voteValue: 5,
+  voteValue: 0,
+  fromDate: '',
+  toDate: '',
 };
 
 export const movieSlice = createSlice({
@@ -31,6 +33,12 @@ export const movieSlice = createSlice({
     addVoteValue: (state, action: PayloadAction<number>) => {
       state.voteValue = action.payload;
     },
+    addFromDate: (state, action: PayloadAction<string>) => {
+      state.fromDate = action.payload;
+    },
+    addToDate: (state, action: PayloadAction<string>) => {
+      state.toDate = action.payload;
+    },
   },
 });
 
@@ -40,5 +48,7 @@ export const {
   addSelectedGenre,
   removeSelectedGenre,
   addVoteValue,
+  addFromDate,
+  addToDate,
 } = movieSlice.actions;
 export default movieSlice.reducer;

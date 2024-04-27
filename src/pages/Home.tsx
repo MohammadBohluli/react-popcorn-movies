@@ -86,6 +86,8 @@ const Home = () => {
   const sortBy = useAppSelector((state) => state.movie.sortBy);
   const selectedGenres = useAppSelector((state) => state.movie.selectedGenres);
   const voteValue = useAppSelector((state) => state.movie.voteValue);
+  const fromDate = useAppSelector((state) => state.movie.fromDate);
+  const toDate = useAppSelector((state) => state.movie.toDate);
 
   const pageNumber = searchParams.get('page') ?? 1;
 
@@ -98,9 +100,12 @@ const Home = () => {
     sort_by: sortBy,
     selectedGenres: selectedGenres.join(','),
     voteValue: voteValue,
+    fromDate: fromDate,
+    toDate: toDate,
   });
 
-  const movies = data?.results || [];
+  // const movies = data?.results || [];
+  const movies = data?.results ? data.results : [];
 
   const skletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
