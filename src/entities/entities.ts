@@ -15,6 +15,7 @@ export interface MovieState {
   searchInput: string;
   sortBy: string;
   selectedGenres: number[];
+  voteValue: number;
 }
 
 export interface Movie {
@@ -49,4 +50,5 @@ export interface FilterQueryArgument {
   page?: number;
   sort_by?: string;
   selectedGenres?: string;
+  voteValue?: number;
 }

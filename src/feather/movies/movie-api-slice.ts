@@ -26,9 +26,14 @@ export const movieApi = createApi({
           const {
             page = 1,
             sort_by = 'popularity.desc',
-            selectedGenres = '28',
+            selectedGenres = 28,
+            voteValue = 5,
           } = args;
-          return `discover/movie?page=${page}&sort_by=${sort_by}&with_genres=${selectedGenres}`;
+          return `discover/movie?
+          page=${page}
+          &sort_by=${sort_by}
+          &with_genres=${selectedGenres}
+          &vote_average.gte=${voteValue}`;
         },
       }),
       getSingleMovie: builder.query<Movie, number | void>({

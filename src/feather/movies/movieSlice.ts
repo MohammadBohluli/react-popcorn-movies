@@ -5,6 +5,7 @@ const initialState: MovieState = {
   searchInput: '',
   sortBy: '',
   selectedGenres: [],
+  voteValue: 5,
 };
 
 export const movieSlice = createSlice({
@@ -27,6 +28,9 @@ export const movieSlice = createSlice({
       );
       state.selectedGenres.splice(index, 1);
     },
+    addVoteValue: (state, action: PayloadAction<number>) => {
+      state.voteValue = action.payload;
+    },
   },
 });
 
@@ -35,5 +39,6 @@ export const {
   setSortBy,
   addSelectedGenre,
   removeSelectedGenre,
+  addVoteValue,
 } = movieSlice.actions;
 export default movieSlice.reducer;

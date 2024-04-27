@@ -85,6 +85,7 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = useAppSelector((state) => state.movie.sortBy);
   const selectedGenres = useAppSelector((state) => state.movie.selectedGenres);
+  const voteValue = useAppSelector((state) => state.movie.voteValue);
 
   const pageNumber = searchParams.get('page') ?? 1;
 
@@ -96,6 +97,7 @@ const Home = () => {
     page: Number(pageNumber),
     sort_by: sortBy,
     selectedGenres: selectedGenres.join(','),
+    voteValue: voteValue,
   });
 
   const movies = data?.results || [];
