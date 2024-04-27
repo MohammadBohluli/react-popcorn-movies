@@ -1,16 +1,7 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  FormControl,
-  NativeSelect,
-  Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import { FormControl, NativeSelect } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setSortBy } from '../feather/movies/movieSlice';
+import AccordionMovie from './AccordionMovie';
 
 const SortSelector = () => {
   const sortBy = useAppSelector((state) => state.movie.sortBy);
@@ -28,42 +19,24 @@ const SortSelector = () => {
   ];
 
   return (
-    <Box mb={2}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{
-            height: '50px',
-            '&.Mui-expanded': {
-              minHeight: '0',
-              borderBottom: '1px solid grey',
-            },
+    <AccordionMovie title={'Sort By'}>
+      <FormControl fullWidth>
+        <NativeSelect
+          value={sortBy}
+          onChange={(e) => dispatch(setSortBy(e.target.value))}
+          inputProps={{
+            name: 'Sort',
+            id: 'uncontrolled-native',
           }}
         >
-          <Typography>Sort</Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ padding: '30px 16px' }}>
-          <FormControl fullWidth>
-            <NativeSelect
-              value={sortBy}
-              onChange={(e) => dispatch(setSortBy(e.target.value))}
-              inputProps={{
-                name: 'Sort',
-                id: 'uncontrolled-native',
-              }}
-            >
-              {sortOrder.map((order) => (
-                <option key={order.value} value={order.value}>
-                  {order.label}
-                </option>
-              ))}
-            </NativeSelect>
-          </FormControl>
-        </AccordionDetails>
-      </Accordion>
-    </Box>
+          {sortOrder.map((order) => (
+            <option key={order.value} value={order.value}>
+              {order.label}
+            </option>
+          ))}
+        </NativeSelect>
+      </FormControl>
+    </AccordionMovie>
   );
 };
 

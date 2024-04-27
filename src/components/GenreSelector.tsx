@@ -1,8 +1,4 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
   List,
   ListItem,
   ListItemProps,
@@ -10,12 +6,12 @@ import {
   styled,
 } from '@mui/material';
 import { useGetGenreListQuery } from '../feather/movies/movie-api-slice';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
   addSelectedGenre,
   removeSelectedGenre,
 } from '../feather/movies/movieSlice';
+import AccordionMovie from './AccordionMovie';
 
 const CustomListItem = styled(ListItem)<ListItemProps>(({ theme }) => ({
   cursor: 'pointer',
@@ -35,6 +31,7 @@ const GenreSelector = () => {
   const dispatch = useAppDispatch();
 
   const handleClickGenre = (id: number) => {
+    //checking selected genres in query params
     const isExistGenre = selectedGenres.includes(id);
     if (isExistGenre) {
       dispatch(removeSelectedGenre(id));
@@ -43,39 +40,21 @@ const GenreSelector = () => {
     }
   };
   return (
-    <Box>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{
-            height: '50px',
-            '&.Mui-expanded': {
-              minHeight: '0',
-              borderBottom: '1px solid grey',
-            },
-          }}
-        >
-          <Typography>Filters</Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ padding: '30px 16px' }}>
-          <List sx={{ display: 'flex', flexWrap: 'wrap' }}>
-            {data?.genres.map(({ id, name }) => (
-              <CustomListItem
-                key={id}
-                onClick={() => handleClickGenre(id)}
-                sx={{
-                  backgroundColor: selectedGenres.includes(id) ? '#42a5f5' : '',
-                }}
-              >
-                <Typography fontSize={13}>{name}</Typography>
-              </CustomListItem>
-            ))}
-          </List>
-        </AccordionDetails>
-      </Accordion>
-    </Box>
+    <AccordionMovie title={'Genres'}>
+      <List sx={{ display: 'flex', flexWrap: 'wrap' }}>
+        {data?.genres.map(({ id, name }) => (
+          <CustomListItem
+            key={id}
+            onClick={() => handleClickGenre(id)}
+            sx={{
+              backgroundColor: selectedGenres.includes(id) ? '#42a5f5' : '',
+            }}
+          >
+            <Typography fontSize={13}>{name}</Typography>
+          </CustomListItem>
+        ))}
+      </List>
+    </AccordionMovie>
   );
 };
 

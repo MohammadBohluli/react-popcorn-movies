@@ -1,10 +1,11 @@
-import { Box, Grid, Pagination, Stack } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useGetMovieListQuery } from '../feather/movies/movie-api-slice';
 import CradMovie from '../components/CardMovie';
 import CardSkleton from '../components/CardSkleton';
 import ShowError from '../components/ShowError';
 import { useSearchParams } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
+import PaginationMovie from '../components/PaginationMovie';
 
 // const Home = () => {
 //   const [searchParams, setSearchParams] = useSearchParams();
@@ -97,11 +98,11 @@ const Home = () => {
     selectedGenres: selectedGenres.join(','),
   });
 
-  const movies = data?.results ? data.results : [];
+  const movies = data?.results || [];
 
   const skletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const handlePageChange = (
+  const handleChangePage = (
     _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
@@ -128,22 +129,12 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
-      {/* Pagination ///////////////////////////////////////// */}
-      <Stack my={7}>
-        <Pagination
-          count={data?.total_pages}
-          onChange={handlePageChange}
-          page={Number(pageNumber)}
-          siblingCount={3}
-          size="large"
-          color="primary"
-          sx={{
-            '.MuiPagination-ul': {
-              justifyContent: 'center',
-            },
-          }}
-        />
-      </Stack>
+
+      <PaginationMovie
+        count={data?.total_pages}
+        pageNumber={Number(pageNumber)}
+        onChangePage={handleChangePage}
+      />
     </Box>
   );
 };
