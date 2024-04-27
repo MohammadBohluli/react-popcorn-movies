@@ -9,6 +9,7 @@ import { useState } from 'react';
 import SearchInput from './SearchInput';
 import SortSelector from './SortSelector';
 import GenreSelector from './GenreSelector';
+import VoteSelector from './VoteSelector';
 
 export default function SearchAppBar() {
   const [open, setOpen] = useState<boolean>(false);
@@ -53,6 +54,7 @@ export default function SearchAppBar() {
         >
           <SortSelector />
           <GenreSelector />
+          <VoteSelector />
         </Box>
       </Drawer>
     </>
