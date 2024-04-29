@@ -1,9 +1,9 @@
 import { InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
-import { FormEvent, useState } from 'react';
 import { useAppDispatch } from '../app/hooks';
 import { setSearchInput } from '../feather/movies/movieSlice';
+import { useState } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,25 +51,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const SearchInput = () => {
   const [value, setValue] = useState<string>('');
   const dispatch = useAppDispatch();
-  // const { data: searchList } = useSearchMovieQuery({
-  //   searchQuery: searchInput,
-  //   page: Number(pageNumber),
-  // });
-
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(setSearchInput(value));
-  };
-
   return (
-    <form onSubmit={handleOnSubmit}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        dispatch(setSearchInput(value));
+      }}
+    >
       <Search>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
 
         <StyledInputBase
-          value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Search Movies ..."
           inputProps={{ 'aria-label': 'search' }}
