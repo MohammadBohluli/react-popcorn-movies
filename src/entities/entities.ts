@@ -44,8 +44,8 @@ export interface GenreList {
 // Filtering
 /////////////////////////////
 export interface SearchQueryArgument {
-  searchQuery: string;
   page: number;
+  searchQuery: string;
 }
 
 export interface FilterQueryArgument {
