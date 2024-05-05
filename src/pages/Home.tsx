@@ -49,7 +49,18 @@ const Home = () => {
     <Box my={'20px'}>
       <Grid container spacing={8} justifyContent={'center'}>
         {/* loading skleton until load data */}
-        {movieListLoading &&
+        {movieListLoading
+          ? skletons.map((skleton) => (
+              <Grid item key={skleton}>
+                <CardSkleton key={skleton} />
+              </Grid>
+            ))
+          : movies.map((moviItem) => (
+              <Grid item key={moviItem.id}>
+                <CradMovie {...moviItem} />
+              </Grid>
+            ))}
+        {/* {movieListLoading &&
           skletons.map((skleton) => (
             <Grid item key={skleton}>
               <CardSkleton key={skleton} />
@@ -60,7 +71,7 @@ const Home = () => {
           <Grid item key={moviItem.id}>
             <CradMovie {...moviItem} />
           </Grid>
-        ))}
+        ))} */}
       </Grid>
 
       <PaginationMovie
